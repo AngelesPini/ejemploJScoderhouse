@@ -32,7 +32,7 @@ body {
   color: #fff;
 }
 .producto button:hover {
-  background-color: blueviolet;
+  background-color: #8a2be2;
   color: #fff;
 }
 nav {
@@ -111,9 +111,9 @@ span {
   padding: 8px;
 }
 .contenedorProductos button:hover {
-  background-color: palevioletred;
+  background-color: #d87093;
   color: #fff;
 }
 .producto button {
-  background-color: crimson;
+  background-color: #dc143c;
 }

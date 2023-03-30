@@ -39,6 +39,7 @@ function mostrarProductos(array){
             <h5>${Producto.nombre}</h5>
             <img src="${Producto.img}" alt="">
             <div class="textoPaquete">
+                <p> Unidades por card: ${Producto.cantidad}</p>
                 <p>${Producto.descripcion}</p>
                 <span>${Producto.promo}</span>
             </div>
@@ -56,7 +57,21 @@ function mostrarProductos(array){
         let botonElegir = document.getElementById(`botonElegir${Producto.id}`)
         botonElegir.addEventListener('click', ()=>{
             console.log(`Elegido ${Producto.nombre}`);
-            alert(`agregado ${Producto.nombre}`)
+            Toastify({
+                text: `Agregaste ${Producto.nombre} a tu carrito con éxito`,
+                duration: 1500,
+                destination: "https://github.com/apvarun/toastify-js",
+                newWindow: true,
+                close: true,
+                gravity: "bottom", 
+                position: "right", 
+                stopOnFocus: true, 
+                style: {
+                  background: "linear-gradient(to right, #8a2be2, #d87093)",
+                },
+                onClick: function(){} 
+              }).showToast();
+
             // llamo a la funcion que agrega mis productos
             agregarProductos(Producto.id)
 
@@ -104,9 +119,9 @@ function agregarProductos(id){
         <img src="${productoAgrgar.img}" alt="">
         <div class="textoPaquete">
             tiene promocion?: <span>${productoAgrgar.promo}</span>
-            cantidad: <span>${productoAgrgar.cantidad}</span>
+            cantidad: <span id=cantidad${productoAgrgar.id}>${productoAgrgar.cantidad}</span>
         </div>
-        <p class="precio">${productoAgrgar.precio}</p>
+        <p class="precio">precio por unidad: ${productoAgrgar.precio}</p>
         <button id="eliminar${productoAgrgar.id}" class="btn-eliminar">eliminar</button>
     </div>
         `
@@ -119,6 +134,21 @@ function agregarProductos(id){
                 // le digo que esta variable se va a ejecutar cuando YO se lo pida, a traves de una arrow function con "REMOVE"
                 trash.addEventListener('click',() =>{
                     console.log(productoAgrgar.nombre + ' ELIMINADO');
+                    Toastify({
+                        text: `Eliminaste ${productoAgrgar.nombre} de tu carrito :(`,
+                        duration: 2000,
+                        destination: "https://github.com/apvarun/toastify-js",
+                        newWindow: true,
+                        close: true,
+                        gravity: "top", 
+                        position: "right", 
+                        stopOnFocus: true, 
+                        style: {
+                          background: "linear-gradient(to right, #dc143c, #d87093)",
+                          borderRadius:"20px",
+                        },
+                        onClick: function(){} 
+                      }).showToast();
                     trash.parentElement.remove()
         
                     // le pido a mi array que almacena los prodcutos que filtre el id del objeto que quiero eliminar
@@ -131,6 +161,8 @@ function agregarProductos(id){
                     // que el cambio se almacene en mi storage si elimino un producto
                     localStorage.setItem('compraProducto', JSON.stringify(miCompra))
                 })
+                // calcula el precio total de este producto
+
     }
 
         // que los agregados se almacenen en mi storage
